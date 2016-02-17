@@ -1,0 +1,30 @@
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+public class Game extends JPanel{
+	// there are 10 mines in our game every time, so we need to keep track of this.
+	private int mines_left = 10;
+	// I feel as if the timer should be a float, but we'll keep it as an int for now.
+	private int timer = 0;
+	
+	private final int rows    = 10;
+	private final int columns = 10;
+	
+	// Declaring a 2d array for our JButtons.
+	private JButton grid[][];
+	
+	// Constructor for our Game class.
+	public Game()
+	{
+		JPanel score_board = new JPanel(new GridLayout(2, 3, 5, 3));
+		/*
+		 * use new ImageIcon ("image path in project") to add pictures instead of text
+		 */
+		
+		
+	}
+	
+	
+}
