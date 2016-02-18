@@ -5,6 +5,7 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		Game game_obj = new Game();
+		System.out.println("YOOO");
 		game_obj.game_start();
 	}
 

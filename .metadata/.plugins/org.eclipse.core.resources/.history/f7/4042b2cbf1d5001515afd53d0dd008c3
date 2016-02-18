@@ -30,7 +30,7 @@ public class Game extends JPanel{
 	
 	public void game_start()
 	{
-		build_grid();
+		
 	}
 	
 	private void build_grid()
