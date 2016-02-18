@@ -25,7 +25,7 @@ public class Game extends JPanel{
 	{
 
 		JPanel score_board = new JPanel(new GridLayout(2, 3, 5, 3));
-		//this.setSize(400, 400);
+		this.setSize(400, 400);
 		this.setLayout(new GridLayout(10, 10));  
 		grid = new JButton[rows][columns];
 		buildGrid();
@@ -50,7 +50,7 @@ public class Game extends JPanel{
 			for(int j = 0; j<columns; j++)
 			{
 				grid[i][j] = new JButton();
-				//grid[i][j].setSize(100, 100);
+				grid[i][j].setSize(300, 300);
 				this.add(grid[i][j]);
 			}
 		}
@@ -65,8 +65,7 @@ public class Game extends JPanel{
 		JFrame frame = new JFrame("Minesweeper");
 		// add an instance of the game object.
 		frame.add(new Game());
-		// controls size of entire grid.
-		frame.setSize(500,  500);
+		frame.setSize(400,  400);
 		// allows the program to respond when user wants to close the frame.
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -88,7 +87,6 @@ public class Game extends JPanel{
 	{
 		/*
 		 * create mines for the games
-		 * we will call this method when the grid is created.
 		 */
 
 		
