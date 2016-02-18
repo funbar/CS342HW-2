@@ -1,11 +1,6 @@
 import java.awt.GridLayout;
-import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class Game extends JPanel{
@@ -21,9 +16,8 @@ public class Game extends JPanel{
 	private JButton grid[][];
 	
 	// Constructor for our Game class.
-	public Game() 
+	public Game()
 	{
-
 		JPanel score_board = new JPanel(new GridLayout(2, 3, 5, 3));
 		this.setSize(400, 400);
 		this.setLayout(new GridLayout(10, 10));  
@@ -39,7 +33,6 @@ public class Game extends JPanel{
 	
 	public void gameStart()
 	{
-		menuBar();
 		buildGrid();
 	}
 	
@@ -51,7 +44,7 @@ public class Game extends JPanel{
 			{
 				grid[i][j] = new JButton();
 				grid[i][j].setSize(300, 300);
-				this.add(grid[i][j]);
+				
 			}
 		}
 	}
@@ -61,20 +54,6 @@ public class Game extends JPanel{
 		/*
 		 * TODO new JMenu object instance here.
 		 */
-		// must be initialized first
-		JFrame frame = new JFrame("Minesweeper");
-		frame.add(new Game());
-		frame.setSize(400,  400);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-		
-		JMenuBar menuBar = new JMenuBar();
-		JMenu menu = new JMenu("Game");
-		menu.setMnemonic(KeyEvent.VK_G);
-		menuBar.add(menu);
-		frame.setJMenuBar(menuBar);
-		//JMenuItem menuExit = new JMenuItem();
-		
 	}
 	
 	private void generateMines()
@@ -82,8 +61,6 @@ public class Game extends JPanel{
 		/*
 		 * create mines for the games
 		 */
-
-		
 	}
 	
 	private void randomizer()

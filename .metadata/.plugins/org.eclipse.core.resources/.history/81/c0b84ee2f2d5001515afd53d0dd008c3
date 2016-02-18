@@ -1,11 +1,6 @@
 import java.awt.GridLayout;
-import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class Game extends JPanel{
@@ -21,14 +16,10 @@ public class Game extends JPanel{
 	private JButton grid[][];
 	
 	// Constructor for our Game class.
-	public Game() 
+	public Game()
 	{
-
 		JPanel score_board = new JPanel(new GridLayout(2, 3, 5, 3));
-		this.setSize(400, 400);
-		this.setLayout(new GridLayout(10, 10));  
 		grid = new JButton[rows][columns];
-		buildGrid();
 		
 		/*
 		 * use new ImageIcon ("image path in project") to add pictures instead of text
@@ -37,13 +28,12 @@ public class Game extends JPanel{
 		
 	}
 	
-	public void gameStart()
+	public void game_start()
 	{
-		menuBar();
-		buildGrid();
+		build_grid();
 	}
 	
-	private void buildGrid()
+	private void build_grid()
 	{
 		for(int i = 0; i<rows; i++)
 		{
@@ -51,39 +41,23 @@ public class Game extends JPanel{
 			{
 				grid[i][j] = new JButton();
 				grid[i][j].setSize(300, 300);
-				this.add(grid[i][j]);
+				
 			}
 		}
 	}
 	
-	private void menuBar()
+	private void menu_bar()
 	{
 		/*
 		 * TODO new JMenu object instance here.
 		 */
-		// must be initialized first
-		JFrame frame = new JFrame("Minesweeper");
-		frame.add(new Game());
-		frame.setSize(400,  400);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-		
-		JMenuBar menuBar = new JMenuBar();
-		JMenu menu = new JMenu("Game");
-		menu.setMnemonic(KeyEvent.VK_G);
-		menuBar.add(menu);
-		frame.setJMenuBar(menuBar);
-		//JMenuItem menuExit = new JMenuItem();
-		
 	}
 	
-	private void generateMines()
+	private void generate_mines()
 	{
 		/*
 		 * create mines for the games
 		 */
-
-		
 	}
 	
 	private void randomizer()
@@ -94,7 +68,7 @@ public class Game extends JPanel{
 		 */
 	}
 	
-	private void topScores()
+	private void top_scores()
 	{
 		/*
 		 * List of top scores - top 10

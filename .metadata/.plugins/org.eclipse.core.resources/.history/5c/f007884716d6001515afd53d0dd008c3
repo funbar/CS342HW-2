@@ -1,0 +1,17 @@
+import javax.swing.JFrame;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Game game_obj = new Game();
+		JFrame frame = new JFrame("Minesweeper");
+		frame.add(game_obj);
+		frame.setSize(400,  400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		game_obj.gameStart();
+	}
+
+}

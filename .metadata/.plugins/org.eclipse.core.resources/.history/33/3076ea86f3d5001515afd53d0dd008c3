@@ -4,10 +4,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		Game game_obj = new Game();
 		
-
+		Game game_obj = new Game();
+		JFrame frame = new JFrame("Minesweeper");
+		frame.add(game_obj);
+		frame.setSize(400,  400);
 		game_obj.gameStart();
 	}
 
