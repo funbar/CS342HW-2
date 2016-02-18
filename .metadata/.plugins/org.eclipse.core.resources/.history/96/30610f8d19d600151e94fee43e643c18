@@ -61,16 +61,13 @@ public class Game extends JPanel{
 		/*
 		 * TODO new JMenu object instance here.
 		 */
-		// The "window" at the very top
+		// must be initialized first
 		JFrame frame = new JFrame("Minesweeper");
-		// add an instance of the game object.
 		frame.add(new Game());
 		frame.setSize(400,  400);
-		// allows the program to respond when user wants to close the frame.
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
-		// must be initialized first
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Game");
 		menu.setMnemonic(KeyEvent.VK_G);
