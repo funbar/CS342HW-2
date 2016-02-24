@@ -17,7 +17,8 @@ import javax.swing.JPanel;
 public class Game extends JPanel implements MouseListener{
 	// there are 10 mines in our game every time, so we need to keep track of this.
 	private int mines_left = 10;
-	//private int mine_exists = 1;
+	private int mine_exists = 1;
+	// I feel as if the timer should be a float, but we'll keep it as an int for now.
 	private int timer = 0;
 	private Grid gameGrid = new Grid();
 	private JFrame frame;
@@ -72,11 +73,6 @@ public class Game extends JPanel implements MouseListener{
 		JMenu helpMenu = new JMenu("Help");
 		helpMenu.setMnemonic(KeyEvent.VK_L);
 			
-		
-		/*
-		 * I actually tried to separate the menuBar from the constructor and call it from a method
-		 * but it was giving me problems. I primarily wanted to keep the constructor clean.
-		 */
 		// adding everything to the actual bar. kind of like a struct and setting members
 		menuBar.add(gameMenu);
 		gameMenu.add(resetMenuItem);
@@ -134,22 +130,7 @@ public class Game extends JPanel implements MouseListener{
 		 * Need to display all mines to the user once the game is 
 		 * won or lost.
 		 */
-		int gridNewIntBoard[][] = gridIntBoard.getGrid();
-		for(int i = 0; i < rows; i++)
-		{
-			for(int j = 0; j < columns; j++)
-			{
-				if(gridNewIntBoard[i][j] == 50)
-				{
-					// setIcon for images
-					//System.out.println("GAME OVER");
-					grid[i][j].setText("M");
-					
-				}			
-			}
-		}
 	}
-	
 	
 	private void topScores()
 	{
@@ -183,7 +164,7 @@ public class Game extends JPanel implements MouseListener{
 						{
 							System.out.println("EYYYYY");
 							grid[i][j].setText("M");
-							gameOver();
+							// gameOver();
 						}
 						if(gridNewIntBoard[i][j] == 1)
 						{
