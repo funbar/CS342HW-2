@@ -377,12 +377,7 @@ public class Game extends JPanel implements MouseListener{
 							//System.out.println("EYYYYY");
 							//grid[i][j].setText("M");
 							grid[i][j].setIcon(bomb);
-							try {
-								gameOver();
-							} catch (FileNotFoundException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+							gameOver();
 						}
 						if(gridNewIntBoard[i][j] == 0)
 						{
