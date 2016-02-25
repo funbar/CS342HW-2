@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 public class MenuItemListener extends AbstractAction{
@@ -48,10 +49,20 @@ public class MenuItemListener extends AbstractAction{
 	    		/*
 	    		 * A solution for resetting all the top ten scores
 	    		 * could simply just be deletion of the text file.
+	    		 * also we need to reinitialize the board
 	    		 * TODO: we'll need to reset both the game and also the top scores at one point.
 	    		 */
-	    		Game game_obj = new Game();
-	    		game_obj.gameStart();
+	    		Game gameObj = new Game();
+	    		gameObj.gameStart();
+	    		
+	    		//Grid gridObj = new Grid();
+	    		//final JButton grid[][] = gameObj.getGrid();
+	    		//gridObj.buildGrid();
+	    		//Grid JButton grid[][] = gameObj.getGrid();
+	    		//int i = 1;
+	    		//int j = 1;
+	    		//System.out.println("HEELLLLLOOOOO");
+	    		//System.out.println(grid[10][10]);
 	    	}
 
 	    }

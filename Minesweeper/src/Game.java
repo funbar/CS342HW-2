@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Game extends JPanel implements MouseListener{
@@ -48,6 +50,8 @@ public class Game extends JPanel implements MouseListener{
 			{
 				grid[i][j] = new JButton();
 				grid[i][j].addMouseListener(this);
+				//grid[i][j].setBackground(Color.GRAY);
+				//grid[i][j].setOpaque(true);
 				gameBoard.add(grid[i][j]);
  			}
 		}
@@ -148,9 +152,80 @@ public class Game extends JPanel implements MouseListener{
 				}			
 			}
 		}
+		JOptionPane.showMessageDialog(null, "Game Over");
 	}
 	
 	
+	public int getMines_left() {
+		return mines_left;
+	}
+
+
+	public void setMines_left(int mines_left) {
+		this.mines_left = mines_left;
+	}
+
+
+	public int getTimer() {
+		return timer;
+	}
+
+
+	public void setTimer(int timer) {
+		this.timer = timer;
+	}
+
+
+	public Grid getGameGrid() {
+		return gameGrid;
+	}
+
+
+	public void setGameGrid(Grid gameGrid) {
+		this.gameGrid = gameGrid;
+	}
+
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
+
+	public Grid getGridIntBoard() {
+		return gridIntBoard;
+	}
+
+
+	public void setGridIntBoard(Grid gridIntBoard) {
+		this.gridIntBoard = gridIntBoard;
+	}
+
+
+	public JButton[][] getGrid() {
+		return grid;
+	}
+
+
+	public void setGrid(JButton[][] grid) {
+		this.grid = grid;
+	}
+
+
+	public int getRows() {
+		return rows;
+	}
+
+
+	public int getColumns() {
+		return columns;
+	}
+
+
 	private void topScores()
 	{
 		/*
@@ -162,6 +237,7 @@ public class Game extends JPanel implements MouseListener{
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		// BUTTON1 = left click
+		//MouseEvent arg1;
 		if(arg0.getButton() == arg0.BUTTON1)
 		{
 			for(int i = 0; i< rows; i++)
@@ -250,6 +326,44 @@ public class Game extends JPanel implements MouseListener{
 				}
 			}		
 		}	
+		
+		if(arg0.getButton() == arg0.BUTTON3)
+		{
+			for(int i = 0; i< rows; i++)
+			{
+				for(int j = 0; j < columns; j++)
+				{
+					if(grid[i][j] == arg0.getSource() && grid[i][j].getText() == ""){
+						grid[i][j].setText("M");
+						mines_left--;
+						System.out.println("These are the mines remaining: " + mines_left);
+					}
+					else if(grid[i][j].getText() == "M" && grid[i][j] == arg0.getSource())
+					{
+						System.out.println("FFF");
+						grid[i][j].setText("?");
+					}
+					else if(grid[i][j].getText() == "?" && grid[i][j] == arg0.getSource())
+					{
+						grid[i][j].setText("");
+					}
+				}
+			}
+		//if(arg1.getButton() == arg1.BUTTON3){
+			/*for(int i = 0; i< rows; i++)
+			{
+				for(int j = 0; j < columns; j++)
+				{
+					if(grid[i][j] == arg0.getSource()){
+					if(grid[i][j].getText() == "F")
+					{
+						System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFFF");
+						grid[i][j].setText("?");
+					}
+					}
+				}
+			}*/
+		}
 	}
 
 

@@ -70,6 +70,7 @@ public class Grid {
 			{
 				// initialize every grid point to 0;
 				grid[i][j] = 0;
+				//grid[i][j].
 				
 				//this.add(grid[i][j]);
 				//grid[i][j].addActionListener(new ButtonHandler(i, j, grid));
