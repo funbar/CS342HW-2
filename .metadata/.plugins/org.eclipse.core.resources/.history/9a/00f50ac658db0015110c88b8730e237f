@@ -356,11 +356,6 @@ public class Game extends JPanel implements MouseListener{
 			{
 				for(int j = 0; j < columns; j++)
 				{
-					if(mines_left == 0)
-					{
-						System.out.println("You are out of mines!!!");
-						continue;
-					}
 					if(grid[i][j] == arg0.getSource() && grid[i][j].getText() == ""){
 						grid[i][j].setText("M");
 						mines_left--;
@@ -369,14 +364,12 @@ public class Game extends JPanel implements MouseListener{
 					else if(grid[i][j].getText() == "M" && grid[i][j] == arg0.getSource())
 					{
 						System.out.println("FFF");
-						mines_left++;
 						grid[i][j].setText("?");
 					}
 					else if(grid[i][j].getText() == "?" && grid[i][j] == arg0.getSource())
 					{
 						grid[i][j].setText("");
 					}
-
 				}
 			}
 		//if(arg1.getButton() == arg1.BUTTON3){

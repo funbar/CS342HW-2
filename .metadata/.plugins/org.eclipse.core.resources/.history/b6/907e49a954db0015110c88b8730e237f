@@ -26,8 +26,6 @@ public class Game extends JPanel implements MouseListener{
 	private final int rows    = 10;
 	private final int columns = 10;
 	private Grid gridIntBoard;
-	// increments to 90. If it doesnt hit a mine, the player should win.
-	private int movesMade = 0;
 	
 	
 	// Declaring a 2d array for our JButtons.
@@ -120,12 +118,11 @@ public class Game extends JPanel implements MouseListener{
 		gridBoard.buildGrid();
 	}
 		
-	private void gameWinner()
+	private void menuBar()
 	{
-		//if(movesMade == 0)
-		//{
-			JOptionPane.showMessageDialog(null, "You win!");
-		//}
+		/*
+		 * TODO new JMenu object instance here.
+		 */
 	}
 	
 	private void gameInfoGUI()
@@ -252,12 +249,8 @@ public class Game extends JPanel implements MouseListener{
 						int gridNewIntBoard[][] = gridIntBoard.getGrid();
 						
 						/* checks to see if button is ? or M */
-						if(grid[i][j].getText() == "M")
-						{
-							continue;
-						}
 						
-						if(grid[i][j].getText() == "?")
+						if(gridNewIntBoard[i][j] == '?')
 						{
 							continue;
 						}
@@ -268,14 +261,9 @@ public class Game extends JPanel implements MouseListener{
 							grid[i][j].setText("M");
 							gameOver();
 						}
-						if(gridNewIntBoard[i][j] == 0)
-						{
-							movesMade++;
-						}
 						if(gridNewIntBoard[i][j] == 1)
 						{
 							// setIcon for images
-							movesMade++;
 							System.out.println("One");
 							grid[i][j].setText("1");
 							//grid[i][j].setBackground("GRAY");
@@ -283,28 +271,24 @@ public class Game extends JPanel implements MouseListener{
 						if(gridNewIntBoard[i][j] == 2)
 						{
 							// setIcon for images
-							movesMade++;
 							System.out.println("Two");
 							grid[i][j].setText("2");
 						}
 						if(gridNewIntBoard[i][j] == 3)
 						{
 							// setIcon for images
-							movesMade++;
 							System.out.println("Three");
 							grid[i][j].setText("3");						
 						}
 						if(gridNewIntBoard[i][j] == 4)
 						{
 							// setIcon for images
-							movesMade++;
 							System.out.println("Four");
 							grid[i][j].setText("4");
 						}
 						if(gridNewIntBoard[i][j] == 5)
 						{
 							// setIcon for images
-							movesMade++;
 							System.out.println("Five");
 							grid[i][j].setText("5");
 							
@@ -312,7 +296,6 @@ public class Game extends JPanel implements MouseListener{
 						if(gridNewIntBoard[i][j] == 6)
 						{
 							// setIcon for images
-							movesMade++;
 							System.out.println("Six");
 							grid[i][j].setText("6");
 							
@@ -320,7 +303,6 @@ public class Game extends JPanel implements MouseListener{
 						if(gridNewIntBoard[i][j] == 7)
 						{
 							// setIcon for images
-							movesMade++;
 							System.out.println("Seven");
 							grid[i][j].setText("7");
 							
@@ -328,21 +310,16 @@ public class Game extends JPanel implements MouseListener{
 						if(gridNewIntBoard[i][j] == 8)
 						{
 							// setIcon for images
-							movesMade++;
 							System.out.println("Eight");
 							grid[i][j].setText("8");
 							
 						}
-				/*		if(gridNewIntBoard[i][j] == 9)
+						if(gridNewIntBoard[i][j] == 9)
 						{
 							// setIcon for images
 							System.out.println("Nine");
 							grid[i][j].setText("9");
 							
-						}*/
-						if(movesMade == 90)
-						{
-							gameWinner();
 						}
 						
 					}
@@ -356,11 +333,6 @@ public class Game extends JPanel implements MouseListener{
 			{
 				for(int j = 0; j < columns; j++)
 				{
-					if(mines_left == 0)
-					{
-						System.out.println("You are out of mines!!!");
-						continue;
-					}
 					if(grid[i][j] == arg0.getSource() && grid[i][j].getText() == ""){
 						grid[i][j].setText("M");
 						mines_left--;
@@ -369,14 +341,12 @@ public class Game extends JPanel implements MouseListener{
 					else if(grid[i][j].getText() == "M" && grid[i][j] == arg0.getSource())
 					{
 						System.out.println("FFF");
-						mines_left++;
 						grid[i][j].setText("?");
 					}
 					else if(grid[i][j].getText() == "?" && grid[i][j] == arg0.getSource())
 					{
 						grid[i][j].setText("");
 					}
-
 				}
 			}
 		//if(arg1.getButton() == arg1.BUTTON3){
