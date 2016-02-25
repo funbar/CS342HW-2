@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,8 +9,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
+import java.util.TimerTask;
+import java.util.Timer;
 
 import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,37 +23,80 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+//import javax.swing.Timer;
 
 public class Game extends JPanel implements MouseListener{
 	// there are 10 mines in our game every time, so we need to keep track of this.
 	private int mines_left = 10;
 	//private int mine_exists = 1;
-	private int timer = 0;
+	private int timeElapsed = 0;
 	private Grid gameGrid = new Grid();
 	private JFrame frame;
 	private final int rows    = 10;
 	private final int columns = 10;
+	//private ImageIcon one = new ImageIcon("button_1.gif");
+	/*
+	 * all in the default package so path might be different...
+	 */
+	//private ImageIcon one = new ImageIcon("C:\\Users\\Rich\\Documents\\GitHub\\rkim43\\Minesweeper\\src\\button_1.gif");
+	private ImageIcon one = new ImageIcon("button_1.gif");
+	private ImageIcon two = new ImageIcon("button_2.gif");
+	private ImageIcon three = new ImageIcon("button_3.gif");
+	private ImageIcon four = new ImageIcon("button_4.gif");
+	private ImageIcon five = new ImageIcon("button_5.gif");
+	private ImageIcon six = new ImageIcon("button_6.gif");
+	private ImageIcon seven = new ImageIcon("button_7.gif");
+	private ImageIcon eight = new ImageIcon("button_8.gif");
+	private ImageIcon bomb = new ImageIcon("button_bomb_blown.gif");
+	private ImageIcon flag = new ImageIcon("button_flag.gif");
+	private ImageIcon question = new ImageIcon("button_question.gif");
+	private ImageIcon smile = new ImageIcon("smile_button.gif");
+	private ImageIcon dead = new ImageIcon("head_dead.gif");
+	private Timer timerTimer = new Timer();// = new Timer(1000, actionTimeListener);
+	
+	
 	private Grid gridIntBoard;
 	// increments to 90. If it doesnt hit a mine, the player should win.
 	private int movesMade = 0;
-
-
+	JLabel minesGui = new JLabel(String.valueOf("Mines: " + mines_left));
+    JButton resetButton = new JButton();
+    JLabel timer = new JLabel(String.valueOf("Time: " + timeElapsed));
+    
 	// Declaring a 2d array for our JButtons.
 	private JButton grid[][] = new JButton[rows][columns];
 
 	// Constructor for our Game class.
 	public Game() 
 	{
+
+			//	Timer timerTimer = new Timer(1000, actionTimeListener);
+			//	timerTimer.start();
+				
+			//	timeElapsed = (Integer)timerTimer + timeElapsed;
+
+		resetButton.setSize(1, 1);
+		//resetButton.
+		
 		// board of ints
+		
 		gridIntBoard = new Grid();
 		JPanel gameBoard = new JPanel();
 		gameBoard.setLayout(new GridLayout(10, 10));
 		// Panel for the scoreboard.
 		JPanel scoreBoard = new JPanel();
+		//scoreBoard.setLayout(new BoxLayout(scoreBoard, BoxLayout.Y_AXIS));
 		scoreBoard.setLayout(new GridLayout(1, 3));
-		JLabel minesGui = new JLabel(String.valueOf("Mines: " + mines_left));
-
 		scoreBoard.add(minesGui);
+		scoreBoard.add(resetButton);
+		scoreBoard.add(timer);
+		//resetButton.setText("-1");
+		resetButton.addMouseListener(this);
+		resetButton.setIcon(smile);
+
+	/*	minesGui.setAlignmentY(Component.LEFT_ALIGNMENT);
+		resetButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		timer.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		*/
 		// **
 		grid = new JButton[rows][columns];
 		for(int i = 0 ; i < rows; i++)
@@ -105,11 +154,14 @@ public class Game extends JPanel implements MouseListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);	
 		frame.add(scoreBoard, BorderLayout.NORTH);
+		//frame.add(scoreBoard); //, BorderLayout.NORTH
 		frame.setJMenuBar(menuBar);
-		frame.add(gameBoard);
+		frame.add(gameBoard, BorderLayout.CENTER);
 		//frame.add(guiLabel);
 
 		gridIntBoard.buildGrid();
+		
+		
 		System.out.println(gridIntBoard.getGrid());
 
 		/*
@@ -126,6 +178,13 @@ public class Game extends JPanel implements MouseListener{
 		gridBoard.buildGrid();
 	}
 
+	private ActionListener actionTimeListener = new ActionListener()
+	{
+	public void actionPerformed(ActionEvent actionEvent)
+	{
+		timer.setText("Timer: " + timeElapsed);
+	}
+	};
 	private void gameWinner()
 	{
 		//if(movesMade == 0)
@@ -134,13 +193,24 @@ public class Game extends JPanel implements MouseListener{
 		//}
 	}
 
-	private void gameInfoGUI()
-	{
+	private class timerTask extends TimerTask {
+        public void run() {
+            EventQueue.invokeLater(new Runnable() {
+            	public void run() {
+                    timer.setText(String.valueOf("Time: "+ timeElapsed++));
+                }
+            });
+        }
+    }
+	
+	
+//	private void gameInfoGUI()
+//	{
 		/*
 		 * # of mines, time elapsed and smiley face to reset/show information
 		 * is implemented here
 		 */
-	}
+//	}
 
 	private void gameOver(){
 		/*
@@ -156,8 +226,9 @@ public class Game extends JPanel implements MouseListener{
 				{
 					// setIcon for images
 					//System.out.println("GAME OVER");
-					grid[i][j].setText("M");
-
+					grid[i][j].setIcon(bomb);
+					resetButton.setIcon(dead);
+					timerTimer.cancel();
 				}			
 			}
 		}
@@ -176,12 +247,12 @@ public class Game extends JPanel implements MouseListener{
 
 
 	public int getTimer() {
-		return timer;
+		return timeElapsed;
 	}
 
 
 	public void setTimer(int timer) {
-		this.timer = timer;
+		this.timeElapsed = timeElapsed;
 	}
 
 
@@ -247,6 +318,12 @@ public class Game extends JPanel implements MouseListener{
 		// TODO Auto-generated method stub
 		// BUTTON1 = left click
 		//MouseEvent arg1;
+		//MenuItemListener resetTheGame = new MenuItemListener(null, KeyEvent.VK_Q);
+		if(resetButton == arg0.getSource())
+		{
+			System.out.println("TESTTTT");
+			reset();
+		}
 		if(arg0.getButton() == arg0.BUTTON1)
 		{
 			for(int i = 0; i< rows; i++)
@@ -255,6 +332,12 @@ public class Game extends JPanel implements MouseListener{
 				{
 					if(grid[i][j] == arg0.getSource())
 					{
+						if(timeElapsed == 0 )
+						{
+							timerTimer = new Timer();
+	        				timerTimer.schedule(new timerTask(), 0, 1000);
+						}
+						
 						int gridNewIntBoard[][] = gridIntBoard.getGrid();
 
 						/* checks to see if button is ? or M */
@@ -267,11 +350,13 @@ public class Game extends JPanel implements MouseListener{
 						{
 							continue;
 						}
+				
 
 						if(gridNewIntBoard[i][j] == 50)
 						{
-							System.out.println("EYYYYY");
-							grid[i][j].setText("M");
+							//System.out.println("EYYYYY");
+							//grid[i][j].setText("M");
+							grid[i][j].setIcon(bomb);
 							gameOver();
 						}
 						if(gridNewIntBoard[i][j] == 0)
@@ -283,7 +368,8 @@ public class Game extends JPanel implements MouseListener{
 							// setIcon for images
 							movesMade++;
 							System.out.println("One");
-							grid[i][j].setText("1");
+							grid[i][j].setIcon(one);
+							//grid[i][j].setText("1");
 							//grid[i][j].setBackground("GRAY");
 						}
 						if(gridNewIntBoard[i][j] == 2)
@@ -291,28 +377,32 @@ public class Game extends JPanel implements MouseListener{
 							// setIcon for images
 							movesMade++;
 							System.out.println("Two");
-							grid[i][j].setText("2");
+							grid[i][j].setIcon(two);
+							//grid[i][j].setText("2");
 						}
 						if(gridNewIntBoard[i][j] == 3)
 						{
 							// setIcon for images
 							movesMade++;
 							System.out.println("Three");
-							grid[i][j].setText("3");						
+							grid[i][j].setIcon(three);
+							//grid[i][j].setText("3");						
 						}
 						if(gridNewIntBoard[i][j] == 4)
 						{
 							// setIcon for images
 							movesMade++;
 							System.out.println("Four");
-							grid[i][j].setText("4");
+							grid[i][j].setIcon(four);
+							//grid[i][j].setText("4");
 						}
 						if(gridNewIntBoard[i][j] == 5)
 						{
 							// setIcon for images
 							movesMade++;
 							System.out.println("Five");
-							grid[i][j].setText("5");
+							grid[i][j].setIcon(five);
+							//grid[i][j].setText("5");
 
 						}
 						if(gridNewIntBoard[i][j] == 6)
@@ -320,7 +410,8 @@ public class Game extends JPanel implements MouseListener{
 							// setIcon for images
 							movesMade++;
 							System.out.println("Six");
-							grid[i][j].setText("6");
+							grid[i][j].setIcon(six);
+							//grid[i][j].setText("6");
 
 						}
 						if(gridNewIntBoard[i][j] == 7)
@@ -328,7 +419,8 @@ public class Game extends JPanel implements MouseListener{
 							// setIcon for images
 							movesMade++;
 							System.out.println("Seven");
-							grid[i][j].setText("7");
+							grid[i][j].setIcon(seven);
+							//grid[i][j].setText("7");
 
 						}
 						if(gridNewIntBoard[i][j] == 8)
@@ -336,7 +428,8 @@ public class Game extends JPanel implements MouseListener{
 							// setIcon for images
 							movesMade++;
 							System.out.println("Eight");
-							grid[i][j].setText("8");
+							grid[i][j].setIcon(eight);
+							//grid[i][j].setText("8");
 
 						}
 						/*		if(gridNewIntBoard[i][j] == 9)
@@ -369,7 +462,9 @@ public class Game extends JPanel implements MouseListener{
 					}
 					if(grid[i][j] == arg0.getSource() && grid[i][j].getText() == ""){
 						grid[i][j].setText("M");
+						grid[i][j].setIcon(flag);
 						mines_left--;
+						minesGui.setText("Mines: " + mines_left);
 						System.out.println("These are the mines remaining: " + mines_left);
 					}
 					else if(grid[i][j].getText() == "M" && grid[i][j] == arg0.getSource())
@@ -377,14 +472,22 @@ public class Game extends JPanel implements MouseListener{
 						System.out.println("FFF");
 						mines_left++;
 						grid[i][j].setText("?");
+						grid[i][j].setIcon(question);
 					}
 					else if(grid[i][j].getText() == "?" && grid[i][j] == arg0.getSource())
 					{
 						grid[i][j].setText("");
+						grid[i][j].setIcon(null);
 					}
-
+					
 				}
 			}
+			if(arg0.getButton() == arg0.BUTTON1)
+			{
+				if(resetButton.getText() == "-1")
+				{
+					reset();
+				}
 			//if(arg1.getButton() == arg1.BUTTON3){
 			/*for(int i = 0; i< rows; i++)
 			{
@@ -398,10 +501,19 @@ public class Game extends JPanel implements MouseListener{
 					}
 					}
 				}
+				
 			}*/
+			}
 		}
 	}
 
+	private void reset()
+	{
+		MenuItemListener resetButton = new MenuItemListener(null, KeyEvent.VK_Q);
+		resetButton.reset();
+		//gameStart();
+	}
+	
 
 	@Override
 	public void mouseEntered(MouseEvent e) {

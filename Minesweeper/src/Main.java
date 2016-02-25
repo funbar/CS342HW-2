@@ -6,9 +6,8 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		Game game_obj = new Game();
-
-
 		game_obj.gameStart();
+
 	}
 
 }

@@ -44,7 +44,7 @@ public class MenuItemListener extends AbstractAction{
 			reset();
 		}
 	}
-	private void reset()
+	public void reset()
 	{
 		/*
 		 * A solution for resetting all the top ten scores
