@@ -187,10 +187,6 @@ public class Game extends JPanel implements MouseListener{
 		gridBoard.buildGrid();
 	}
 
-	/*
-	 * there is a catch and a throw handler here for if the file does not exist.
-	 * I am grabbing the username from the user here
-	 */
 	private void getUsername() throws FileNotFoundException
 	{
 		System.out.println("Please enter in a username: ");
@@ -202,9 +198,6 @@ public class Game extends JPanel implements MouseListener{
 		writer.write(username);
 		
 	}
-	/*
-	 * Used to help keep track of the timer. Wasn't too reliable, though. 
-	 */
 	private ActionListener actionTimeListener = new ActionListener()
 	{
 	public void actionPerformed(ActionEvent actionEvent)
@@ -212,9 +205,6 @@ public class Game extends JPanel implements MouseListener{
 		timer.setText("Timer: " + timeElapsed);
 	}
 	};
-	/*
-	 * Simply a message printed to the screen.
-	 */
 	private void gameWinner()
 	{
 		//if(movesMade == 0)
@@ -223,9 +213,6 @@ public class Game extends JPanel implements MouseListener{
 		//}
 	}
 
-	/*
-	 * this method was more flexible since I had trouble updating the GUI and not so much incrementing the timer.
-	 */
 	private class timerTask extends TimerTask {
         public void run() {
             EventQueue.invokeLater(new Runnable() {
@@ -245,11 +232,6 @@ public class Game extends JPanel implements MouseListener{
 		 */
 //	}
 
-	
-	/* 
-	 * prints a message if the user loses and also writes the time in the text file. 
-	 * Also sets the icon to dead. Only dead if a bomb is clicked on.
-	 */
 	private void gameOver() throws FileNotFoundException{
 		/*
 		 * Need to display all mines to the user once the game is 
@@ -275,9 +257,7 @@ public class Game extends JPanel implements MouseListener{
 		JOptionPane.showMessageDialog(null, "Game Over");
 	}
 
-/* 
- * LIST OF SETTERS AND GETTERS FOR THE GAME CLASS
- */
+
 	public int getMines_left() {
 		return mines_left;
 	}
@@ -347,19 +327,14 @@ public class Game extends JPanel implements MouseListener{
 		return columns;
 	}
 
-/* END SETTERS AND GETTERS *
- * 
- */
-	
 
-	/*
-	 * probably didnt' need to override this method, to be honest, but I did anyways. 
-	 * This method handles all the mouse clicks for the whole game while I have a separate one for the menu.
-	 * For each JButton, including the reset button, this method handles each click if it's the "source"
-	 * gridIntBoard was something implemented in Grid. It made it very easy to place the mines this way.
-	 * Unique value for a mine was 50.
-	 * I would compare a grid of Jbuttons to a grid of integers and they basically mapped to one another.
-	 */
+	private void topScores()
+	{
+		/*
+		 * List of top scores - top 10
+		 */
+	}
+
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
@@ -501,9 +476,6 @@ public class Game extends JPanel implements MouseListener{
 			}		
 		}	
 
-		/* 
-		 * This handles clicks for the RIGHT mouse clicks. SImply setting flags and question marks.
-		 */
 		if(arg0.getButton() == arg0.BUTTON3)
 		{
 			for(int i = 0; i< rows; i++)
@@ -561,10 +533,6 @@ public class Game extends JPanel implements MouseListener{
 			}
 		}
 	}
-	
-	/* reset the game if called.
-	 * 
-	 */
 
 	private void reset()
 	{
