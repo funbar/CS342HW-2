@@ -28,6 +28,20 @@ public class GameTest extends Game {
 	}
 		
 	@Test
+	public void longClick()
+	{
+        ActionListener al = new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                ++count;
+            }
+        };
+
+        tester.actionDelay(5000);
+        tester.mouseRelease();
+        assertTrue("No abnormal behavior", count > 1);
+    	}
+    
+	@Test
 	public void resetTimer(Timer timer)
 	{
 		int time = gameObj.getTimer();
