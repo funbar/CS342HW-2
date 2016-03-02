@@ -32,8 +32,8 @@ public class GridTest {
 	
 		T6.buildGrid();
 		int rows = T6.grid.length;
-		int expectedMines = 10; 
-		assertEquals(expectedMines,rows);
+		int expectedSize = 10; 
+		assertEquals(expectedSize,rows);
 	}
 	
 	
@@ -42,9 +42,9 @@ public class GridTest {
 	public void buildGridTest2() {
 		Grid T7 = new Grid();
 		int col = T7.grid[0].length;
-		int expectedMines = 10; 
+		int expectedSize = 10; 
 		
-		assertEquals(expectedMines,col);
+		assertEquals(expectedSize,col);
 	}
 	
 	
