@@ -70,7 +70,17 @@ public class GridTest {
 			rand = T9.randomWithRange(0, 10);
 			assertTrue(11>rand);
 		}
+	}
 	
+	public void blankSquare(MouseEvent arg0)
+	{
+		if(arg0.getSource() == 0)
+		{
+			// checks to see if a square is properly blank without a number or a mine
+			// fails test if square contains a value other than 0.
+			assertEquals(arg0.getSource(), 0);
+		}
+	}
 	
 }
 	
