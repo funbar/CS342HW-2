@@ -61,6 +61,16 @@ public class GridTest {
 		assertEquals(expected,T8.grid[2][3]);
 	}
 	
+	@Test
+	public void randomWithRangeTest() {
+		Grid T9 = new Grid();
+		int rand;
+	
+		for (int i = 0; i<1000; i++){
+			rand = T9.randomWithRange(0, 10);
+			assertTrue(11>rand);
+		}
+	
 	
 }
 	
