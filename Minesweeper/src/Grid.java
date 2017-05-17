@@ -68,12 +68,8 @@ public class Grid {
 		{
 			for(int j = 0; j<columns; j++)
 			{
-				// initialize every grid point to 0;
 				grid[i][j] = 0;
-				//grid[i][j].
 
-				//this.add(grid[i][j]);
-				//grid[i][j].addActionListener(new ButtonHandler(i, j, grid));
 			}
 		}
 		printBoard();
@@ -184,7 +180,6 @@ public class Grid {
 			int randRow = randomWithRange(0, 9); //(int)Math.random() * 9 + 0;
 			int randCol = randomWithRange(0, 9); //(int)Math.random() * 9 + 0;
 			System.out.println(randRow +"+"+randCol);
-			// replace with "mine" underneath JButton somehow
 			if(grid[randRow][randCol] == mine)
 			{
 				i--;
@@ -195,8 +190,4 @@ public class Grid {
 			}
 		}	
 	}
-	/*private void ButtonHandler implements ActionListener
-	{
-	}
-	 */
 }
