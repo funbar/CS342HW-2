@@ -40,12 +40,7 @@ public class Game extends JPanel implements MouseListener{
 	private final int columns = 10;
 	private String username = "";
 	private File file = new File("gameScores.txt");
-
-	//private ImageIcon one = new ImageIcon("button_1.gif");
-	/*
-	 * all in the default package so path might be different...
-	 */
-	//private ImageIcon one = new ImageIcon("C:\\Users\\Rich\\Documents\\GitHub\\rkim43\\Minesweeper\\src\\button_1.gif");
+	
 	private ImageIcon one = new ImageIcon("button_1.gif");
 	private ImageIcon two = new ImageIcon("button_2.gif");
 	private ImageIcon three = new ImageIcon("button_3.gif");
@@ -75,17 +70,7 @@ public class Game extends JPanel implements MouseListener{
 	// Constructor for our Game class.
 	public Game() 
 	{
-
-			//	Timer timerTimer = new Timer(1000, actionTimeListener);
-			//	timerTimer.start();
-				
-			//	timeElapsed = (Integer)timerTimer + timeElapsed;
-
 		resetButton.setSize(1, 1);
-		//resetButton.
-		
-		// board of ints
-		
 		gridIntBoard = new Grid();
 		JPanel gameBoard = new JPanel();
 		gameBoard.setLayout(new GridLayout(10, 10));
@@ -99,12 +84,6 @@ public class Game extends JPanel implements MouseListener{
 		//resetButton.setText("-1");
 		resetButton.addMouseListener(this);
 		resetButton.setIcon(smile);
-
-	/*	minesGui.setAlignmentY(Component.LEFT_ALIGNMENT);
-		resetButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		timer.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		*/
-		// **
 		grid = new JButton[rows][columns];
 		for(int i = 0 ; i < rows; i++)
 		{
@@ -112,8 +91,6 @@ public class Game extends JPanel implements MouseListener{
 			{
 				grid[i][j] = new JButton();
 				grid[i][j].addMouseListener(this);
-				//grid[i][j].setBackground(Color.GRAY);
-				//grid[i][j].setOpaque(true);
 				gameBoard.add(grid[i][j]);
 			}
 		}
@@ -143,7 +120,6 @@ public class Game extends JPanel implements MouseListener{
 		 * I actually tried to separate the menuBar from the constructor and call it from a method
 		 * but it was giving me problems. I primarily wanted to keep the constructor clean.
 		 */
-		// adding everything to the actual bar. kind of like a struct and setting members
 		menuBar.add(gameMenu);
 		gameMenu.add(resetMenuItem);
 		gameMenu.add(topTenMenuItem);
@@ -167,19 +143,9 @@ public class Game extends JPanel implements MouseListener{
 		//frame.add(guiLabel);
 
 		gridIntBoard.buildGrid();
-		
-		
 		System.out.println(gridIntBoard.getGrid());
 
-		/*
-		 * use new ImageIcon ("image path in project") to add pictures instead of text
-		 */
-
 	}
-
-	/* 
-	 * wanted to keep this simple. Starts the whole game. Called in Main after a new instance of the Game class is called.
-	 */
 	public void gameStart()
 	{
 		Grid gridBoard = new Grid();
@@ -187,10 +153,6 @@ public class Game extends JPanel implements MouseListener{
 		gridBoard.buildGrid();
 	}
 
-	/*
-	 * there is a catch and a throw handler here for if the file does not exist.
-	 * I am grabbing the username from the user here
-	 */
 	private void getUsername() throws FileNotFoundException
 	{
 		System.out.println("Please enter in a username: ");
@@ -202,9 +164,6 @@ public class Game extends JPanel implements MouseListener{
 		writer.write(username);
 		
 	}
-	/*
-	 * Used to help keep track of the timer. Wasn't too reliable, though. 
-	 */
 	private ActionListener actionTimeListener = new ActionListener()
 	{
 	public void actionPerformed(ActionEvent actionEvent)
@@ -212,20 +171,12 @@ public class Game extends JPanel implements MouseListener{
 		timer.setText("Timer: " + timeElapsed);
 	}
 	};
-	/*
-	 * Simply a message printed to the screen.
-	 */
 	private void gameWinner()
 	{
-		//if(movesMade == 0)
-		//{
 		JOptionPane.showMessageDialog(null, "You win!");
 		//}
 	}
 
-	/*
-	 * this method was more flexible since I had trouble updating the GUI and not so much incrementing the timer.
-	 */
 	private class timerTask extends TimerTask {
         public void run() {
             EventQueue.invokeLater(new Runnable() {
@@ -235,21 +186,6 @@ public class Game extends JPanel implements MouseListener{
             });
         }
     }
-	
-	
-//	private void gameInfoGUI()
-//	{
-		/*
-		 * # of mines, time elapsed and smiley face to reset/show information
-		 * is implemented here
-		 */
-//	}
-
-	
-	/* 
-	 * prints a message if the user loses and also writes the time in the text file. 
-	 * Also sets the icon to dead. Only dead if a bomb is clicked on.
-	 */
 	private void gameOver() throws FileNotFoundException{
 		/*
 		 * Need to display all mines to the user once the game is 
@@ -263,8 +199,6 @@ public class Game extends JPanel implements MouseListener{
 			{
 				if(gridNewIntBoard[i][j] == 50)
 				{
-					// setIcon for images
-					//System.out.println("GAME OVER");
 					grid[i][j].setIcon(bomb);
 					resetButton.setIcon(dead);
 					timerTimer.cancel();
