@@ -17,7 +17,6 @@ public class MenuItemListener extends AbstractAction{
 
 		if(e.getActionCommand() == "About")
 		{
-			//System.out.println("TESSSSSSSSSSST");
 			JOptionPane.showMessageDialog(null, "This project was created by Richard Kim (rkim43) and Eilbron. \n" +
 					"This was homework #2 of the 2016 spring semester. \nThe class is currently being taught by professor Troy.\n");
 		}
@@ -30,7 +29,6 @@ public class MenuItemListener extends AbstractAction{
 					"completes a game of minesweeper, their username and score (time elapsed) will be recorded.\n");
 
 		}
-		//JOptionPane.showMessageDialog(null, "Hello World");
 		System.out.println(e.getActionCommand());
 
 		if(e.getActionCommand() == "Exit")
@@ -54,15 +52,6 @@ public class MenuItemListener extends AbstractAction{
 		 */
 		Game gameObj = new Game();
 		gameObj.gameStart();
-
-		//Grid gridObj = new Grid();
-		//final JButton grid[][] = gameObj.getGrid();
-		//gridObj.buildGrid();
-		//Grid JButton grid[][] = gameObj.getGrid();
-		//int i = 1;
-		//int j = 1;
-		//System.out.println("HEELLLLLOOOOO");
-		//System.out.println(grid[10][10]);
 	}
 
 }
